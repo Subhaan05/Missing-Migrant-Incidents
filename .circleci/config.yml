@@ -11,10 +11,10 @@ jobs:
           command: pip install -r requirements.txt  
       - run:
           name: Run data analysis script
-          command: python data_analysis.py  #
+          command: python data_analysis.py  
       - run:
           name: Run unit tests
-          command: python -m pytest tests/test_data_analysis.py  
+          command: pytest  
 
 workflows:
   version: 2
