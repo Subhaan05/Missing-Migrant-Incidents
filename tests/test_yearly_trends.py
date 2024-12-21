@@ -1,6 +1,5 @@
-# Importing Modules
+import os
 import pandas as pd
-import matplotlib.pyplot as plt
 
 # Function to clean the data
 def cleaning_data():
@@ -35,16 +34,20 @@ def cleaning_data():
 
     return data
 
-data = cleaning_data()
+# testing yearly trends visualisation
 
-#Visualisations
+def test_yearly_trends_visualisation():
+    
+    # Load cleaned data
+    data = cleaning_data()
 
-# Yearly Trends in Migrant Deaths and Missing Cases
-yearly = data.groupby('Incident Year')[['Death Toll', 'Estimated Missing Count',]].sum()
-yearly.plot(kind='bar', figsize=(12, 8), stacked=True, edgecolor='black')
-plt.title('Yearly Trends in Migrant Deaths and Missing Cases')
-plt.ylabel('Count')
-plt.xlabel('Year')
-plt.xticks(rotation=0)
-plt.legend(loc="upper left")
-plt.savefig('Visualisations/yearly_trends.png')
+    # check the grouped result
+    
+    grouped_data = data.groupby('Incident Year')[['Death Toll', 'Estimated Missing Count']].sum()
+    
+    assert 'Death Toll' in grouped_data.columns, "Death Toll  missing in grouped data."
+    assert 'Estimated Missing Count' in grouped_data.columns, "Estimated Missing Count  missing in grouped data."
+    assert len(grouped_data) > 0, "Grouped data is empty."
+
+    # check if visualisation file is created
+    assert os.path.exists('Visualisations/yearly_trends.png'), "The visualisation file was not made."
