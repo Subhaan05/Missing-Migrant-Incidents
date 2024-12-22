@@ -41,18 +41,17 @@ def cleaning_data():
     
     return data
 
+# testing monthly trends visualisation
 
-# testing yearly trends visualisation
-
-def test_yearly_trends_visualisation():
+def test_monthly_trends_visualisation():
     
     # Load cleaned data
     
     data = cleaning_data()
-    grouped_data = data.groupby('Incident Year')[['Number of Dead', 'Minimum Estimated Number of Missing']].sum()
+    monthly = data['Month'].value_counts(sort=False)
     
     #  grouped data is not empty
-    assert len(grouped_data) > 0, "Grouped data is empty."
+    assert len(monthly) > 0, "Monthly data is empty."
 
     # Check if the file is created
-    assert os.path.exists('Visualisations/yearly_trends.png'), "The visualisation file 'yearly_trends.png' was not created."
+    assert os.path.exists('Visualisations/monthly_trends.png'), "The visualisation file was not created."
