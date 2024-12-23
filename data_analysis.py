@@ -92,14 +92,50 @@ plt.savefig('Visualisations/monthly_trends.png')
 plt.clf()
 
 
+# 3. Global cause of death from incidents by Gender / Age
+
+death_cause = data.copy()
+# Abbreviating long causes of death
+abbreviation_mapping = {
+    "Mixed or unknown": "Unknown",
+    "Vehicle accident / death linked to hazardous transport": "Transport Accident",
+    "Sickness / lack of access to adequate healthcare": "No Healthcare",
+    "Harsh environmental conditions / lack of adequate shelter, food, water": "Environmental",
+    "Accidental death": "Accidental"
+}
+death_cause['Cause of Death'] = death_cause['Cause of Death'].replace(abbreviation_mapping)
+death_cause_gender = death_cause.groupby('Cause of Death')[['Number of Females', 'Number of Males', 'Number of Children']].sum()
+
+# stacked bar chart
+death_cause_gender.plot(kind='bar', stacked=True, figsize=(12, 8), edgecolor='black', color=['orange', 'lightblue', 'lightgreen'])
+plt.title('Global Causes of Migrant Deaths during Travel Incidents by Gender / Age')
+plt.ylabel('Total Count')
+plt.xlabel('Cause of Death')
+plt.xticks(rotation=0)  
+plt.legend(title='Number by Gender / Age', loc='upper right')
+plt.grid(axis='y',alpha=0.5)
+plt.tight_layout()
+plt.savefig('Visualisations/death_trends.png')
+plt.clf()
+
+
 
 # Text file containing .describe() for each visualization
 with open('Visualisations/Statistics.txt', 'w') as file:
     
-    file.write("Visualisation 1: Yearly Trends in Migrant Deaths and Missing Cases\n")
+    file.write("Visualisation 1: Global Yearly Trends in Migrant Deaths and Missing Cases through Travel Incidents\n")
     file.write(yearly.describe().to_string())
     file.write("\n\n")
 
-    file.write("Visualisation 2: Count of Incidents by Month\n")
+    file.write("Visualisation 2: Global Count of Migrant Travel incidents by Month\n")
     file.write(monthly.describe().to_string())
+    file.write("\n\n")
+
+    file.write("Visualisation 3: Gender and Age Distribution Stacked by Causes of Death\n")
+    file.write("Summary Statistics for Causes of Death:\n")
+    file.write(death_cause['Cause of Death'].value_counts().to_string())
+    file.write("\n\n")
+
+    file.write("Summary of Gender and Age Counts by Cause of Death:\n")
+    file.write(death_cause_gender.describe().to_string())
     file.write("\n\n")
