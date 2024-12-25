@@ -2,6 +2,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from scipy.stats import kruskal
 
 
 # Function to clean the data
@@ -9,6 +10,8 @@ def cleaning_data():
     # Reading the dataset
     data = pd.read_csv('Missing_Migrants_Global_Figures_allData.csv')
 
+    print("Shape of the data before pre-processing:", data.shape)
+    
     # Keep only required columns
     required_columns = [
         'Incident Type', 'Incident Year', 'Month', 'Region of Origin', 'Region of Incident',
@@ -39,10 +42,11 @@ def cleaning_data():
 
     data = data.dropna()
 
-    print("Shape of the data:", data.shape)    
+    print("Shape of the data after pre-processing:", data.shape)
     print("Number of missing values in each column:\n", data.isnull().sum())
     
     return data
+
 
 data = cleaning_data()
 
@@ -144,6 +148,14 @@ plt.tight_layout()
 plt.savefig('Visualisations/region_trends.png')
 plt.clf()
 
+    # Kruskal-Wallis test calculation
+    
+region_incidents = [region_year.loc[region].values for region in region_year.index]
+h_stat, p_value = kruskal(*region_incidents)
+
+
+
+    
 # Text file containing .describe() for each visualization
 with open('Visualisations/Statistics.txt', 'w') as file:
     
@@ -169,4 +181,8 @@ with open('Visualisations/Statistics.txt', 'w') as file:
     
     file.write("Visualisation 5: Count of Travel Incidents by Region of Incident\n")
     file.write(region_year.describe().to_string())
+    file.write("\n\n")
+    file.write("Kruskal-Wallis Test Results for Visualisation 5:\n")
+    file.write(f"H-Statistic: {h_stat:.5f}\n")
+    file.write(f"P-Value: {p_value:.5f}\n")
     file.write("\n\n")
