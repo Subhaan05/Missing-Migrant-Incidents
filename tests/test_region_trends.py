@@ -42,17 +42,17 @@ def cleaning_data():
     return data
 
 
-# testing yearly trends visualisation
+# testing region trends visualisation
 
-def test_yearly_trends_visualisation():
-    
+def test_region_trends_visualisation():
+
     # Load cleaned data
     
     data = cleaning_data()
-    grouped_data = data.groupby('Incident Year')[['Number of Dead', 'Minimum Estimated Number of Missing']].sum()
+    region_year = data.groupby(['Region of Incident', 'Incident Year']).size().unstack(fill_value=0)
     
     #  grouped data is not empty
-    assert len(grouped_data) > 0, "Grouped data is empty."
+    assert len(region_year) > 0, "Grouped data is empty."
 
     # Check if the file is created
-    assert os.path.exists('Visualisations/yearly_trends.png'), "The visualisation file was not created."
+    assert os.path.exists('Visualisations/region_trends.png'), "The visualisation file was not created."

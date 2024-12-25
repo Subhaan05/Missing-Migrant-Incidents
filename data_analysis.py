@@ -95,8 +95,8 @@ plt.clf()
 
 
 # 3. Global cause of death from incidents by Gender / Age
-
 death_cause = data.copy()
+
 # Abbreviating long causes of death
 abbreviation_mapping = {
     "Mixed or unknown": "Unknown",
@@ -121,17 +121,28 @@ plt.savefig('Visualisations/death_trends.png')
 plt.clf()
 
 
-# 4. Highest Count of Travel Incidents by Migration Route and Year
+# 4. Count of Travel Incidents by Migration Route and Year
 heatmap = data.groupby(['Migration Route', 'Incident Year']).size().unstack(fill_value=0)
 plt.figure(figsize=(16, 8))
 sns.heatmap(heatmap, cmap="YlGnBu", annot=True, fmt='d', linewidths=0.5)
-plt.title('Highest Count of Travel Incidents by Migration Route and Year')
+plt.title('Count of Travel Incidents by Migration Route and Year')
 plt.xlabel('Year',)
 plt.ylabel('Migration Route')
 plt.tight_layout()
 plt.savefig('Visualisations/migration_trends.png')
 plt.clf()
 
+# 5. Count of Travel Incidents by Region of Incident and Year
+region_year = data.groupby(['Region of Incident', 'Incident Year']).size().unstack(fill_value=0)
+region_year.plot(kind='bar', stacked=True, figsize=(12, 8), colormap='viridis', edgecolor='black')
+plt.title('Count of Travel Incidents by Region of Incident')
+plt.ylabel('Number of Incidents')
+plt.xlabel('Region')
+plt.legend(title='Year', loc='upper right')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('Visualisations/region_trends.png')
+plt.clf()
 
 # Text file containing .describe() for each visualization
 with open('Visualisations/Statistics.txt', 'w') as file:
@@ -145,7 +156,6 @@ with open('Visualisations/Statistics.txt', 'w') as file:
     file.write("\n\n")
 
     file.write("Visualisation 3: Gender and Age Distribution Stacked by Causes of Death\n")
-    file.write("Summary Statistics for Causes of Death:\n")
     file.write(death_cause['Cause of Death'].value_counts().to_string())
     file.write("\n\n")
 
@@ -153,6 +163,10 @@ with open('Visualisations/Statistics.txt', 'w') as file:
     file.write(death_cause_gender.describe().to_string())
     file.write("\n\n")
     
-    file.write("Visualisation 4: Highest Count of Travel Incidents by Migration Route and Year\n")
+    file.write("Visualisation 4: Count of Travel Incidents by Migration Route and Year\n")
     file.write(heatmap.describe().to_string())
+    file.write("\n\n")
+    
+    file.write("Visualisation 5: Count of Travel Incidents by Region of Incident\n")
+    file.write(region_year.describe().to_string())
     file.write("\n\n")
