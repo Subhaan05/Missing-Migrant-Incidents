@@ -49,7 +49,7 @@ def cleaning_data():
 
 
 data = cleaning_data()
-
+print(data.head(5))
 
 # Visualisations
 
@@ -71,7 +71,8 @@ plt.axhline(y=min_value, color='red', linestyle='-', linewidth=1.5, label="Min: 
 plt.axhline(y=max_value, color='green', linestyle='-', linewidth=1.5, label="Max: " + str(max_value))
 
 plt.legend(loc="upper center")
-plt.savefig('Visualisations/yearly_trends.png')
+plt.figtext(0.5, -0.002, "Figure 2: Global Yearly Trends in Migrant Deaths and Missing Cases through Travel Incidents\nThis figure displays yearly totals of migrant deaths and missing cases stacked together.\nThe trend shows 2016 and 2023 far above the rest, pulling the mean up as there are only 4 years above the mean.", ha="center")
+plt.savefig('Visualisations/yearly_trends.png', bbox_inches='tight')
 plt.clf()
 
 
@@ -94,7 +95,8 @@ plt.axhline(y=min_value, color='red', linestyle='-', linewidth=1.5, label="Min: 
 plt.axhline(y=max_value, color='green', linestyle='-', linewidth=1.5, label="Max: " + str(max_value))
 
 plt.legend(loc="upper left")
-plt.savefig('Visualisations/monthly_trends.png')
+plt.figtext(0.5, -0.05, "Figure 3: Global Count of Migrant Travel Incidents by Month\nThis figure shows the monthly count of travel incidents, highlighting seasonal trends.\nThe trend reveals peak incidents occur frime June to October, then dip significantly below the mean.", ha="center")
+plt.savefig('Visualisations/monthly_trends.png', bbox_inches='tight')
 plt.clf()
 
 
@@ -121,7 +123,8 @@ plt.xticks(rotation=0)
 plt.legend(title='Number by Gender / Age', loc='upper right')
 plt.grid(axis='y',alpha=0.5)
 plt.tight_layout()
-plt.savefig('Visualisations/death_trends.png')
+plt.figtext(0.5, -0.05, "Figure 4: Global Causes of Migrant Deaths during Travel Incidents by Gender / Age\nThis figure shows causes of migrant deaths, categorised by gender and age group.\nDrowning emerges as the leading cause of death, affecting all age groups. Males are the largest demographic group by number of deaths.", ha="center")
+plt.savefig('Visualisations/death_trends.png', bbox_inches='tight')
 plt.clf()
 
 
@@ -133,7 +136,8 @@ plt.title('Count of Travel Incidents by Migration Route and Year')
 plt.xlabel('Year',)
 plt.ylabel('Migration Route')
 plt.tight_layout()
-plt.savefig('Visualisations/migration_trends.png')
+plt.figtext(0.5, -0.05, "Figure 5: Count of Travel Incidents by Migration Route and Year\nThis heatmap summarises the count of travel incidents across migration routes over time, highlighting high-risk routes.\nThere are 3 routes that have caused a large number of deaths, Afganisatan to Iran, the Sahara Desert crossing and the US-Mexico border crossing.", ha="center")
+plt.savefig('Visualisations/migration_trends.png', bbox_inches='tight')
 plt.clf()
 
 # 5. Count of Travel Incidents by Region of Incident and Year
@@ -143,9 +147,10 @@ plt.title('Count of Travel Incidents by Region of Incident')
 plt.ylabel('Number of Incidents')
 plt.xlabel('Region')
 plt.legend(title='Year', loc='upper right')
-plt.xticks(rotation=45)
+plt.xticks(rotation=45, ha='right')
 plt.tight_layout()
-plt.savefig('Visualisations/region_trends.png')
+plt.figtext(0.5, -0.05, "Figure 6: Count of Travel Incidents by Region of Incident\nThis stacked bar chart displays the number of travel incidents across regions, broken down by year.\nNorth America and Southern Asia regions report the highest number of incidents.", ha="center")
+plt.savefig('Visualisations/region_trends.png', bbox_inches='tight')
 plt.clf()
 
     # Kruskal-Wallis test calculation
