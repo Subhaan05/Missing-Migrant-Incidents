@@ -46,7 +46,7 @@ To run the analysis locally:
     ```bash
     pip install -r requirements.txt
 
-4. Run the data anlysis script - 'data_analysis.py':
+4. Run the data analysis script - 'data_analysis.py':
    ```bash
    python data_analysis.py
 
