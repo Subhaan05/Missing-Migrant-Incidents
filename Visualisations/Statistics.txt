@@ -1,4 +1,14 @@
-Visualisation 1: Global Yearly Trends in Migrant Deaths and Missing Cases through Travel Incidents
+Visualisation 1: Global Count of Migrant Travel incidents by Month
+count      12.000000
+mean     1456.083333
+std       141.300748
+min      1265.000000
+25%      1348.500000
+50%      1417.000000
+75%      1602.000000
+max      1640.000000
+
+Visualisation 2: Global Yearly Trends in Migrant Deaths and Missing Cases through Travel Incidents
        Number of Dead  Minimum Estimated Number of Missing
 count       11.000000                            11.000000
 mean      3677.090909                          2626.454545
@@ -8,16 +18,6 @@ min       1982.000000                          1796.000000
 50%       3692.000000                          2564.000000
 75%       4200.000000                          2982.500000
 max       5357.000000                          3784.000000
-
-Visualisation 2: Global Count of Migrant Travel incidents by Month
-count      12.000000
-mean     1456.083333
-std       141.300748
-min      1265.000000
-25%      1348.500000
-50%      1417.000000
-75%      1602.000000
-max      1640.000000
 
 Visualisation 3: Gender and Age Distribution Stacked by Causes of Death
 Cause of Death

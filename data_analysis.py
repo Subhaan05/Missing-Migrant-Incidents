@@ -53,30 +53,7 @@ print(data.head(5))
 
 # Visualisations
 
-# 1. Global Yearly Trends in Migrant Deaths and Missing Cases through Travel Incidents
-yearly = data.groupby('Incident Year')[['Number of Dead', 'Minimum Estimated Number of Missing']].sum()
-yearly.plot(kind='bar', figsize=(12, 8), stacked=True, edgecolor='black')
-plt.title('Global Yearly Trends in Migrant Deaths and Missing Cases through Travel Incidents')
-plt.ylabel('Count')
-plt.xlabel('Year')
-plt.xticks(rotation=0)
-
-missing_dead_yearly = yearly['Number of Dead'] + yearly['Minimum Estimated Number of Missing']
-mean_value = missing_dead_yearly.mean()
-min_value = missing_dead_yearly.min()
-max_value = missing_dead_yearly.max()
-
-plt.axhline(y=mean_value, color='orange', linestyle='-', linewidth=1.5, label="Mean: " + str(round(mean_value, 2)))
-plt.axhline(y=min_value, color='red', linestyle='-', linewidth=1.5, label="Min: " + str(min_value))
-plt.axhline(y=max_value, color='green', linestyle='-', linewidth=1.5, label="Max: " + str(max_value))
-
-plt.legend(loc="upper center")
-plt.figtext(0.5, -0.002, "Figure 2: Global Yearly Trends in Migrant Deaths and Missing Cases through Travel Incidents\nThis figure displays yearly totals of migrant deaths and missing cases stacked together.\nThe trend shows 2016 and 2023 far above the rest, pulling the mean up as there are only 4 years above the mean.", ha="center")
-plt.savefig('Visualisations/yearly_trends.png', bbox_inches='tight')
-plt.clf()
-
-
-# 2. Global Count of Migrant Travel incidents by Month
+# 1. Global Count of Migrant Travel incidents by Month
 monthly = data['Month'].value_counts(sort=False)
 monthly.plot(kind='line', marker='o', figsize=(12, 8), color='darkblue')
 plt.title('Global Count of Migrant Travel Incidents by Month')
@@ -95,8 +72,30 @@ plt.axhline(y=min_value, color='red', linestyle='-', linewidth=1.5, label="Min: 
 plt.axhline(y=max_value, color='green', linestyle='-', linewidth=1.5, label="Max: " + str(max_value))
 
 plt.legend(loc="upper left")
-plt.figtext(0.5, -0.05, "Figure 3: Global Count of Migrant Travel Incidents by Month\nThis figure shows the monthly count of travel incidents, highlighting seasonal trends.\nThe trend reveals peak incidents occur frime June to October, then dip significantly below the mean.", ha="center")
+plt.figtext(0.5, -0.05, "Figure 2: Global Count of Migrant Travel Incidents by Month\nThis figure shows the monthly count of travel incidents, highlighting seasonal trends.\nThe trend reveals peak incidents occur frime June to October, then dip significantly below the mean.", ha="center")
 plt.savefig('Visualisations/monthly_trends.png', bbox_inches='tight')
+plt.clf()
+
+# 2. Global Yearly Trends in Migrant Deaths and Missing Cases through Travel Incidents
+yearly = data.groupby('Incident Year')[['Number of Dead', 'Minimum Estimated Number of Missing']].sum()
+yearly.plot(kind='bar', figsize=(12, 8), stacked=True, edgecolor='black')
+plt.title('Global Yearly Trends in Migrant Deaths and Missing Cases through Travel Incidents')
+plt.ylabel('Count')
+plt.xlabel('Year')
+plt.xticks(rotation=0)
+
+missing_dead_yearly = yearly['Number of Dead'] + yearly['Minimum Estimated Number of Missing']
+mean_value = missing_dead_yearly.mean()
+min_value = missing_dead_yearly.min()
+max_value = missing_dead_yearly.max()
+
+plt.axhline(y=mean_value, color='orange', linestyle='-', linewidth=1.5, label="Mean: " + str(round(mean_value, 2)))
+plt.axhline(y=min_value, color='red', linestyle='-', linewidth=1.5, label="Min: " + str(min_value))
+plt.axhline(y=max_value, color='green', linestyle='-', linewidth=1.5, label="Max: " + str(max_value))
+
+plt.legend(loc="upper center")
+plt.figtext(0.5, -0.002, "Figure 3: Global Yearly Trends in Migrant Deaths and Missing Cases through Travel Incidents\nThis figure displays yearly totals of migrant deaths and missing cases stacked together.\nThe trend shows 2016 and 2023 far above the rest, pulling the mean up as there are only 4 years above the mean.", ha="center")
+plt.savefig('Visualisations/yearly_trends.png', bbox_inches='tight')
 plt.clf()
 
 
@@ -164,12 +163,12 @@ h_stat, p_value = kruskal(*region_incidents)
 # Text file containing .describe() for each visualization
 with open('Visualisations/Statistics.txt', 'w') as file:
     
-    file.write("Visualisation 1: Global Yearly Trends in Migrant Deaths and Missing Cases through Travel Incidents\n")
-    file.write(yearly.describe().to_string())
-    file.write("\n\n")
-
-    file.write("Visualisation 2: Global Count of Migrant Travel incidents by Month\n")
+    file.write("Visualisation 1: Global Count of Migrant Travel incidents by Month\n")
     file.write(monthly.describe().to_string())
+    file.write("\n\n")
+    
+    file.write("Visualisation 2: Global Yearly Trends in Migrant Deaths and Missing Cases through Travel Incidents\n")
+    file.write(yearly.describe().to_string())
     file.write("\n\n")
 
     file.write("Visualisation 3: Gender and Age Distribution Stacked by Causes of Death\n")
