@@ -1,2 +1,3 @@
 # Exclude pytest cache folder
 .pytest_cache/
+.DS_Store
