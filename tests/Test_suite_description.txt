@@ -1,0 +1,43 @@
+Test Suite Description
+
+This file describes the test suite for the Missing-Migrant-Incidents repository.
+The tests are divided into four sections:
+    - Data Loading
+    - Data Cleaning
+    - Visualisations
+    - Statistics
+
+Data Loading
+
+    - test_data_loading.py
+Verifies the dataset file exists, ensures the file can be read and confirms it is not empty after loading.
+
+
+Data Cleaning
+
+    - test_data_cleaning.py
+Ensures all reuqired columns are present and removal of unneded columns is completed. Confirms that null values are handled and none exist.
+
+
+Visualisations
+
+    - test_death_trends.py
+Verifies cause of death data is grouped with gender and age and that  the visulisation file has been created.
+
+    - test_migration_trends.py
+Verifies that the heatmap for migration route by year is created and that the visulisation file has been created.
+
+    - test_monthly_trends.py
+Verifies the aggregation of monthly incident counts and that the visulisation file has been created.
+
+    - test_region_trends.py
+Verifies yearly incident data is grouped with regions and that the visulisation file has been created.
+
+    - test_yearly_trends.py
+Verifies yearly incident totals for deaths and missing migrants is aggregated adn that the visulisation file has been created.
+
+
+Statistics
+
+    - test_statistics.py
+Ensures the statistical summary file has been created and that it is not empty, but instead contains the statisitcal data.
